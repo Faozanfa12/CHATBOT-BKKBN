@@ -1,0 +1,1173 @@
+/* Ganti seluruh isi file chatbot/static/css/style.css dengan kode ini */
+:root {
+  --color-primary: #00bcd4; /* Biru Cyan Terang */
+  --color-secondary: #0097a7; /* Biru Teal Tua */
+  --color-background: #e0f7fa; /* Latar Belakang Chat (Sangat Terang Cyan) */
+  --color-user-bubble: #4dd0e1; /* Bubble Pengguna (Cyan Sedang) */
+  --color-bot-bubble: #e0e0e0; /* Bubble Bot (Abu-abu Terang) */
+  --color-text-dark: #263238; /* Teks Gelap (Abu-abu Kebiruan Sangat Tua) */
+  --color-text-light: #ffffff; /* Teks Terang (Putih) */
+  --color-accent-hover: #ffab00; /* Aksen Hover (Oranye Amber) */
+  --chat-radius: 30px; /* Radius untuk keseluruhan chat container, lebih bulat */
+  --bubble-radius: 22px; /* Radius untuk bubble pesan, lebih bulat */
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.18);
+  --shadow-strong: rgba(0, 0, 0, 0.3);
+}
+
+/* Base Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #2e8d99 0%,
+    #00bcd4 100%
+  ); /* Gradasi Latar Belakang */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden; /* Mencegah scroll yang tidak perlu dari efek latar */
+  color: var(--color-text-dark); /* Warna teks default */
+}
+
+/* Chat Container - Pusat Perhatian */
+.chat-container {
+  width: 95%;
+  max-width: 500px; /* Sedikit lebih lebar untuk nuansa premium */
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.98); /* Lebih solid, sedikit transparansi */
+  border-radius: var(--chat-radius);
+  box-shadow: 0 25px 70px var(--shadow-strong); /* Bayangan Lebih Dramatis dan Lembut */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 85vh; /* Lebih tinggi */
+  max-height: 95vh; /* Batasan tinggi */
+  position: relative;
+  transform: translateY(0);
+  transition: transform 0.6s ease-out, box-shadow 0.6s ease-out; /* Animasi saat load */
+  animation: floatEffect 3.5s ease-in-out infinite alternate; /* Efek melayang ringan */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Sedikit border untuk kesan "mengambang" */
+}
+
+/* Animasi melayang ringan */
+@keyframes floatEffect {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-12px); /* Gerakan melayang lebih tinggi */
+  }
+}
+
+/* Header - Modern dan Dinamis */
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 28px; /* Padding lebih besar */
+  background: linear-gradient(
+    45deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 100%
+  ); /* Gradasi header */
+  color: var(--color-text-light);
+  box-shadow: 0 5px 15px var(--shadow-light);
+  position: relative;
+  z-index: 2;
+  border-top-left-radius: var(
+    --chat-radius
+  ); /* Memastikan radius mengikuti container */
+  border-top-right-radius: var(--chat-radius);
+}
+
+.bkkbn-logo {
+  width: 45px; /* Ukuran logo lebih besar */
+  height: 45px;
+  margin-right: 15px;
+  border-radius: 50%; /* Logo bulat */
+  object-fit: cover;
+  animation: pulse 2.5s infinite ease-in-out; /* Animasi berdenyut lebih halus */
+  border: 2px solid rgba(255, 255, 255, 0.7); /* Border pada logo */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.08); /* Sedikit lebih besar */
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); /* Efek denyut cahaya */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+}
+
+.chat-title {
+  font-size: 1.35em; /* Ukuran judul lebih besar */
+  font-weight: 700; /* Lebih tebal */
+  letter-spacing: 0.8px;
+  text-shadow: 1px 1px 3px var(--shadow-light); /* Sedikit bayangan teks */
+}
+
+/* Chat Box - Area Pesan */
+.chat-box {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 25px; /* Padding lebih besar */
+  background: var(--color-background);
+  /* Scrollbar Kustom */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-background);
+}
+
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-box::-webkit-scrollbar-track {
+  background: var(--color-background);
+  border-radius: 10px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  border: 2px solid var(--color-background);
+}
+
+/* Message Bubbles - Lebih Modern dan Interaktif */
+.message-pair {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px; /* Jarak antar pasangan pesan */
+}
+
+.message {
+  max-width: 85%; /* Sedikit lebih lebar */
+  padding: 15px 20px; /* Padding lebih besar */
+  border-radius: var(--bubble-radius);
+  margin: 7px 0; /* Jarak antar bubble dalam satu pasangan */
+  line-height: 1.6;
+  word-wrap: break-word;
+  box-shadow: 0 3px 10px var(--shadow-light); /* Bayangan lebih lembut */
+  position: relative;
+  animation: messagePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Animasi pop in */
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+@keyframes messagePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.user {
+  margin-left: auto;
+  background: var(--color-user-bubble);
+  color: var(--color-text-light);
+  border-bottom-right-radius: 8px; /* Sudut lebih tajam di pojok bawah kanan */
+  background: linear-gradient(
+    45deg,
+    #00acc1 0%,
+    var(--color-user-bubble) 100%
+  ); /* Gradasi user bubble */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.bot-container {
+  margin-right: auto;
+  margin-top: 10px;
+  display: flex; /* Gunakan flex untuk bot-container */
+  align-items: flex-start; /* Sejajarkan ke atas */
+}
+
+.bot {
+  background: var(--color-bot-bubble);
+  color: var(--color-text-dark);
+  margin-right: auto;
+  border-bottom-left-radius: 8px; /* Sudut lebih tajam di pojok bawah kiri */
+  background: linear-gradient(
+    45deg,
+    #f8f8f8 0%,
+    var(--color-bot-bubble) 100%
+  ); /* Gradasi bot bubble */
+}
+
+/* Input Box - Area Input yang Elegan */
+.input-box {
+  display: flex;
+  align-items: center;
+  padding: 18px 25px; /* Padding lebih besar */
+  border-top: 1px solid #e0e0e0;
+  background: #fff;
+  box-shadow: 0 -8px 25px var(--shadow-light); /* Bayangan di atas input lebih kuat */
+  position: relative;
+  z-index: 2;
+  border-bottom-left-radius: var(
+    --chat-radius
+  ); /* Memastikan radius mengikuti container */
+  border-bottom-right-radius: var(--chat-radius);
+}
+
+.input-box input {
+  flex: 1;
+  padding: 15px 22px; /* Padding lebih besar */
+  border: 1px solid #cfd8dc;
+  border-radius: 35px; /* Lebih membulat */
+  font-size: 1.05em;
+  color: var(--color-text-dark);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  background: #fdfdfd;
+}
+
+.input-box input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.25); /* Efek glow saat focus lebih jelas */
+  background: #fff;
+}
+
+.input-box .voice-btn {
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6f7 100%);
+  box-shadow: 0 4px 12px rgba(2, 136, 153, 0.08);
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s ease;
+}
+
+.input-box .voice-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(2, 136, 153, 0.12);
+}
+
+.input-box .voice-btn:active {
+  transform: translateY(0);
+}
+
+.input-box .voice-btn[aria-pressed="true"],
+.input-box .voice-btn.mic-listening {
+  background: linear-gradient(
+    45deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  color: var(--color-text-light);
+  box-shadow: 0 8px 30px rgba(0, 188, 212, 0.28);
+}
+
+.input-box .voice-btn.mic-listening {
+  box-shadow: 0 0 0 6px rgba(0, 188, 212, 0.12), 0 10px 30px rgba(0, 0, 0, 0.08);
+  transform: scale(1.03);
+}
+
+.input-box button#send-btn {
+  margin-left: 15px;
+  padding: 15px 28px; /* Padding lebih besar */
+  background: linear-gradient(
+    45deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 100%
+  ); /* Gradasi tombol */
+  border: none;
+  color: var(--color-text-light);
+  border-radius: 35px; /* Lebih membulat */
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05em;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 188, 212, 0.35); /* Bayangan tombol lebih kuat */
+}
+
+.input-box button#send-btn:hover {
+  background: linear-gradient(
+    45deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  ); /* Reverse gradasi */
+  transform: translateY(-3px) scale(1.03); /* Efek sedikit terangkat dan membesar lebih dramatis */
+  box-shadow: 0 8px 20px rgba(0, 188, 212, 0.45);
+}
+.input-box button#send-btn:active {
+  transform: translateY(0) scale(0.98); /* Efek tombol tertekan */
+  box-shadow: 0 3px 10px rgba(0, 188, 212, 0.25);
+}
+
+/* KRITIKAL: PERBAIKAN MENU FAQ (Tombol Pilih Pertanyaan) */
+#template-select {
+  display: none;
+}
+
+.faq-menu {
+  position: relative;
+  padding: 12px 25px; /* Padding lebih besar */
+  background: #f9f9f9;
+  border-bottom: 1px solid #e5e5e5;
+  z-index: 3; /* Pastikan di atas chat-box saat terbuka */
+}
+
+.faq-menu > .pick-btn {
+  display: flex; /* Gunakan flex untuk icon */
+  align-items: center;
+  justify-content: space-between; /* Untuk meletakkan icon di kanan */
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid #c0c0c0;
+  border-radius: 12px; /* Lebih membulat */
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1em; /* Ukuran font standar */
+  color: var(--color-text-dark);
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease,
+    color 0.2s ease;
+  box-shadow: 0 3px 8px var(--shadow-light);
+}
+
+.faq-menu > .pick-btn::after {
+  content: "▼"; /* Tambahkan ikon panah */
+  font-size: 0.7em;
+  margin-left: 12px;
+  transition: transform 0.3s ease;
+  color: var(--color-secondary); /* Warna panah */
+}
+
+.faq-menu > .pick-btn.open::after {
+  transform: rotate(180deg); /* Panah berputar saat terbuka */
+  color: var(--color-primary);
+}
+
+.faq-menu > .pick-btn:hover {
+  background: #e3f2fd; /* Warna hover lebih cerah */
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.25);
+  color: var(--color-secondary);
+}
+
+/* Sesuaikan juga faq-list-area */
+.faq-list-area {
+  position: absolute;
+  left: 25px; /* Mengikuti padding FAQ menu */
+  right: 25px; /* Mengikuti padding FAQ menu */
+  max-height: 280px; /* Sedikit lebih tinggi */
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px; /* Lebih membulat */
+  padding: 0 12px 12px 12px; /* Padding top diatur 0, samping dan bawah 12px */
+  z-index: 100;
+  box-shadow: 0 10px 30px var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: slideUp 0.3s ease-out forwards;
+  transform-origin: bottom center;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar kustom untuk faq-list-area */
+.faq-list-area::-webkit-scrollbar {
+  width: 6px;
+}
+.faq-list-area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.faq-list-area::-webkit-scrollbar-thumb {
+  background-color: #bbdefb; /* Warna biru muda */
+  border-radius: 10px;
+  border: 1px solid #f1f1f1;
+}
+
+.faq-menu.up .faq-list-area {
+  bottom: 65px; /* Pastikan posisi di atas tombol dengan jarak yang cukup */
+}
+
+.faq-category-title {
+  font-size: 0.9em; /* Sedikit lebih besar */
+  font-weight: 600;
+  color: var(--color-text-light); /* Teks putih untuk kontras */
+  padding: 12px 12px 10px 12px; /* Atur padding-top di sini, bukan di faq-list-area */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Border lebih lembut */
+  text-transform: uppercase;
+  letter-spacing: 0.8px; /* Lebih renggang */
+  position: sticky;
+  top: 0; /* Pastikan top: 0 */
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  ); /* Gradasi untuk judul kategori */
+  z-index: 102;
+  box-shadow: 0 2px 6px var(--shadow-light);
+
+  margin-left: -12px; /* Menutupi padding samping */
+  margin-right: -12px; /* Menutupi padding samping */
+  width: calc(100% + 24px); /* Sesuaikan lebar */
+}
+
+/* Tambahkan padding-top untuk tombol FAQ pertama */
+.faq-list-area .faq-btn:first-of-type {
+  padding-top: 12px; /* Sesuaikan nilai ini sesuai keinginan */
+}
+
+.faq-menu .faq-btn {
+  width: 100%;
+  text-align: left;
+  padding: 13px 18px; /* Padding lebih besar */
+  border: none;
+  background: #fff;
+  border-radius: 8px; /* Sedikit lebih bulat */
+  cursor: pointer;
+  color: var(--color-text-dark);
+  font-size: 0.95em; /* Sedikit lebih besar */
+  font-weight: 400;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+.faq-menu .faq-btn:hover {
+  background: #e0f7fa; /* Warna hover yang lebih lembut */
+  color: var(--color-secondary);
+  transform: translateX(5px); /* Efek bergeser ke kanan lebih jelas */
+  box-shadow: 0 3px 10px rgba(0, 188, 212, 0.15);
+}
+.faq-menu .faq-btn:active {
+  transform: translateX(2px);
+  background: #c5e7ef;
+}
+
+/* WhatsApp menu styles */
+.cs-item {
+  color: var(--color-text-light); /* Teks putih untuk kontras */
+  background: linear-gradient(
+    45deg,
+    #25d366 0%,
+    #1ebe57 100%
+  ); /* Gradasi WhatsApp */
+  font-weight: 600;
+  padding: 14px;
+  margin-top: 15px; /* Jarak lebih besar */
+  border-radius: 10px; /* Lebih membulat */
+  text-align: center !important;
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+.cs-item:hover {
+  background: linear-gradient(
+    45deg,
+    #1ebe57 0%,
+    #25d366 100%
+  ); /* Reverse gradasi */
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+}
+.cs-item:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+}
+
+/* TYPING BUBBLE - Efek Mengetik yang Lebih Halus */
+.typing-bubble {
+  background: var(--color-bot-bubble);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px; /* Padding lebih besar */
+  border-radius: var(--bubble-radius);
+  box-shadow: 0 3px 10px var(--shadow-light);
+  width: fit-content; /* Sesuaikan lebar */
+  margin-right: auto; /* Agar sejajar dengan bot message */
+  transform: translateY(10px); /* Mulai sedikit di bawah */
+  animation: typingEntry 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes typingEntry {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.typing-dots {
+  display: flex;
+  align-items: center;
+}
+
+.typing-dots span {
+  width: 9px; /* Titik lebih besar */
+  height: 9px;
+  background: #8e9eaf; /* Warna abu-abu yang lebih lembut dan sedikit kebiruan */
+  border-radius: 50%;
+  margin: 0 4px; /* Jarak antar titik */
+  animation: typingPulse 1.4s infinite ease-in-out;
+  opacity: 0.7;
+}
+
+.typing-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingPulse {
+  0%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+  .chat-container {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+    max-height: 100vh;
+    box-shadow: none; /* Hilangkan shadow di mode full screen */
+    border: none;
+  }
+  .chat-header {
+    padding: 18px 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .chat-title {
+    font-size: 1.2em;
+  }
+  .bkkbn-logo {
+    width: 38px;
+    height: 38px;
+    margin-right: 10px;
+  }
+  .chat-box {
+    padding: 18px;
+  }
+  .message {
+    max-width: 88%;
+    padding: 12px 16px;
+  }
+  .input-box {
+    padding: 12px 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 -5px 15px var(--shadow-light);
+  }
+  .input-box input {
+    padding: 12px 15px;
+    font-size: 0.95em;
+  }
+  .input-box button {
+    padding: 12px 20px;
+    font-size: 0.95em;
+    margin-left: 10px;
+  }
+  .faq-menu {
+    padding: 10px 15px;
+  }
+  .faq-menu > .pick-btn {
+    padding: 12px 18px;
+    font-size: 0.9em;
+  }
+  .faq-list-area {
+    left: 15px;
+    right: 15px;
+    max-height: 200px; /* Sedikit lebih pendek di mobile */
+    border-radius: 8px;
+  }
+  .faq-menu.up .faq-list-area {
+    bottom: 58px;
+  }
+  .faq-category-title {
+    padding: 10px 10px 8px 10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    width: calc(100% + 20px);
+  }
+  .faq-list-area .faq-btn:first-of-type {
+    padding-top: 8px;
+  }
+  .faq-menu .faq-btn {
+    padding: 10px 12px;
+    font-size: 0.85em;
+  }
+  .cs-item {
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 0.95em;
+  }
+}
+
+/* Markdown Formatting for Bot Messages */
+.message.bot p {
+  margin: 0.4em 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Controls inside bot message (per-message speaker) */
+.message.bot {
+  position: relative;
+}
+.msg-controls {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.tts-btn {
+  border: none;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text-dark);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+.tts-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 0, 0, 0.06);
+}
+.tts-btn.playing {
+  background: linear-gradient(
+    45deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  color: var(--color-text-light);
+  box-shadow: 0 6px 18px rgba(0, 188, 212, 0.18);
+}
+
+/* small tweak so controls don't overlap long code blocks */
+.message.bot pre {
+  padding-right: 46px;
+}
+
+.message.bot strong {
+  font-weight: 600;
+  color: var(--color-text-dark); /* Menggunakan warna teks gelap */
+}
+
+.message.bot em {
+  font-style: italic;
+  color: #546e7a; /* Sedikit lebih gelap dari teks biasa */
+}
+
+.message.bot ul,
+.message.bot ol {
+  margin: 0.6em 1.5em; /* Margin sedikit lebih besar */
+  padding-left: 1.2em;
+  color: #455a64; /* Warna untuk list */
+}
+
+.message.bot li {
+  margin-bottom: 0.4em;
+}
+
+.message.bot code {
+  background: #f0f0f0; /* Warna background code yang lebih terang */
+  border-radius: 5px;
+  padding: 3px 6px; /* Padding lebih besar */
+  font-family: "Fira Code", "Courier New", monospace; /* Font monospace yang lebih modern */
+  font-size: 0.9em;
+  color: #d81b60; /* Warna pink gelap untuk code inline */
+}
+
+.message.bot pre {
+  background: #263238; /* Background gelap untuk blok kode */
+  color: #e0e0e0; /* Teks terang untuk blok kode */
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); /* Bayangan dalam untuk blok kode */
+}
+
+/* ================================
+   Efek saat tombol kirim / input dikunci
+   ================================ */
+#user-input:disabled {
+  background-color: #e0e0e0; /* warna abu muda */
+  color: #78909c; /* teks agak pudar */
+  cursor: not-allowed; /* kursor jadi tanda dilarang */
+  opacity: 0.8; /* sedikit transparan */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Bayangan dalam untuk disabled */
+}
+
+#send-btn:disabled {
+  background: linear-gradient(
+    45deg,
+    #b0bec5 0%,
+    #cfd8dc 100%
+  ); /* Gradasi abu-abu */
+  color: #78909c; /* teks tombol lebih gelap */
+  cursor: not-allowed;
+  opacity: 0.8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Supaya transisi halus waktu diaktifkan kembali */
+#send-btn,
+#user-input {
+  transition: all 0.3s ease;
+}
+/* Efek abu saat input dan tombol dikunci */
+#user-input.is-locked,
+#user-input:disabled {
+  background-color: #e0e0e0;
+  color: #78909c;
+  cursor: not-allowed;
+  opacity: 0.8;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#send-btn.is-locked,
+#send-btn:disabled {
+  background: linear-gradient(45deg, #b0bec5 0%, #cfd8dc 100%);
+  color: #78909c;
+  cursor: not-allowed;
+  opacity: 0.8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================
+   PERBAIKAN POSISI: SPEAKER DI KANAN
+   ========================================================== */
+
+/* 1. Container Ikon Speaker (Pojok Kanan Atas) */
+.msg-controls {
+  position: absolute; /* Kunci posisi agar melayang */
+  top: 12px; /* Jarak dari atas */
+  right: 15px; /* Jarak dari kanan (TEMPEL KANAN) */
+  z-index: 5;
+}
+
+/* 2. Penyesuaian Bubble Pesan Bot */
+.message.bot {
+  position: relative; /* Wajib relative agar ikon nempel di bubble ini */
+  padding-right: 50px !important; /* PENTING: Kosongkan ruang kanan agar teks tidak nabrak ikon */
+}
+
+/* 3. Tombol Speaker */
+.tts-btn {
+  border: none;
+  background: transparent;
+  color: #78909c; /* Warna ikon abu-abu elegan */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.tts-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.tts-btn.playing {
+  color: var(--color-primary);
+  animation: pulseAudio 1.5s infinite;
+}
+
+/* 4. Menu Popup (Agar muncul rapi di bawah kanan ikon) */
+.voice-popup {
+  display: none;
+  position: absolute;
+  top: 110%; /* Muncul di bawah tombol */
+  right: 0; /* Rata KANAN dengan tombol speaker */
+  left: auto; /* Jangan rata kiri */
+
+  background: white;
+  min-width: 150px; /* Lebar menu */
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15); /* Shadow lebih lembut */
+  padding: 6px;
+  z-index: 100;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  /* Animasi Muncul */
+  animation: popupFadeIn 0.2s ease-out;
+  transform-origin: top right; /* Animasi mulai dari pojok kanan atas */
+}
+
+.voice-popup.show {
+  display: block;
+}
+
+/* Sisa style (voice-option, keyframes, dll) biarkan sama seperti sebelumnya */
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pulseAudio {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.voice-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: #444;
+  transition: background 0.2s;
+}
+
+.voice-option:hover {
+  background-color: #e0f7fa; /* Biru muda saat hover */
+  color: var(--color-secondary);
+}
+
+.voice-option.active {
+  background-color: #b2ebf2;
+  color: #006064;
+  font-weight: 700;
+}
+
+/* =========================================
+   MENU PENGATURAN (SETTINGS FAB)
+   ========================================= */
+
+/* Container di Pojok Kanan Header */
+.settings-menu-container {
+  position: absolute;
+  top: 20px;
+  right: 20px; /* Posisi di pojok kanan header */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tombol Utama (Gear Icon) */
+.settings-trigger {
+  width: 40px;
+  height: 40px;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.25
+  ); /* Transparan agar menyatu dengan header */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efek membal */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.settings-trigger:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+/* Efek saat Menu Aktif (Tombol Berputar) */
+.settings-trigger.active {
+  background: #fff;
+  color: var(--color-primary);
+  transform: rotate(90deg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-color: #fff;
+}
+
+/* Container Opsi Anak (Sembunyi by default) */
+.settings-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+
+  /* Posisi absolute relatif terhadap container menu */
+  position: absolute;
+  top: 50px;
+  right: 0;
+  align-items: center;
+}
+
+/* Saat class .show ditambahkan via JS */
+.settings-options.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Tombol Anak (Admin & Dark Mode) */
+.option-btn {
+  width: 38px;
+  height: 38px;
+  background: white;
+  color: #555;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  transform: scale(1.15);
+  color: var(--color-primary);
+  background: #f0f8ff;
+}
+
+/* =========================================
+   DARK MODE STYLES & VARIABLES
+   ========================================= */
+
+/* VARIABEL WARNA DARK MODE */
+body.dark-mode {
+  --color-primary: #00bcd4;
+  --color-secondary: #00acc1;
+  --color-background: #121212; /* Warna dasar chat area gelap */
+  --color-user-bubble: #006064; /* Cyan tua untuk user */
+  --color-bot-bubble: #263238; /* Abu gelap untuk bot */
+  --color-text-dark: #eceff1; /* Teks jadi putih/terang */
+  --color-text-light: #ffffff;
+  --shadow-light: rgba(0, 0, 0, 0.5);
+  --shadow-medium: rgba(0, 0, 0, 0.7);
+  --shadow-strong: rgba(0, 0, 0, 0.9);
+}
+
+/* OVERRIDE ELEMEN SPESIFIK SAAT DARK MODE */
+body.dark-mode {
+  background: #0f172a; /* Latar belakang halaman luar */
+}
+
+/* Container Chat & Header */
+body.dark-mode .chat-container {
+  background: #1e1e1e; /* Card chat gelap */
+  border: 1px solid #333;
+}
+body.dark-mode .chat-header {
+  background: linear-gradient(
+    45deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  ); /* Header lebih elegan gelap */
+}
+
+/* Input Box Area */
+body.dark-mode .input-box {
+  background: #1e1e1e;
+  border-top: 1px solid #333;
+}
+body.dark-mode .input-box input {
+  background: #2c2c2c;
+  color: #fff;
+  border-color: #444;
+}
+body.dark-mode .input-box input:focus {
+  border-color: var(--color-primary);
+  background: #333;
+}
+
+/* Tombol Mic & Send */
+body.dark-mode .voice-btn {
+  background: #2c2c2c;
+  color: #fff;
+  box-shadow: none;
+}
+body.dark-mode .voice-btn:hover {
+  background: #37474f;
+}
+
+/* Menu FAQ */
+body.dark-mode .faq-menu {
+  background: #1e1e1e;
+  border-bottom: 1px solid #333;
+}
+body.dark-mode .faq-menu > .pick-btn {
+  background: #2c2c2c;
+  color: #eceff1;
+  border-color: #444;
+}
+body.dark-mode .faq-list-area {
+  background: #1e1e1e;
+  border-color: #333;
+}
+body.dark-mode .faq-menu .faq-btn {
+  background: #1e1e1e;
+  color: #eceff1;
+}
+body.dark-mode .faq-menu .faq-btn:hover {
+  background: #263238;
+  color: var(--color-primary);
+}
+
+/* Pesan Bot di Dark Mode */
+body.dark-mode .message.bot {
+  background: linear-gradient(45deg, #37474f 0%, #263238 100%);
+  color: #eceff1;
+  border-bottom-left-radius: 8px;
+}
+
+body.dark-mode .message.bot li,
+body.dark-mode .message.bot ul li,
+body.dark-mode .message.bot ol li {
+  color: #348d99 !important;
+  opacity: 1 !important;
+}
+
+/* Opsional: Membuat teks di dalam list sedikit lebih renggang biar enak baca */
+body.dark-mode .message.bot li {
+  margin-bottom: 8px;
+}
+
+/* Text & Code formatting */
+body.dark-mode .message.bot code {
+  background: #101010;
+  color: #ff80ab;
+}
+body.dark-mode .message.bot strong {
+  color: #4dd0e1;
+}
+body.dark-mode .tts-btn {
+  color: #b0bec5;
+}
+body.dark-mode .tts-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+body.dark-mode .voice-popup {
+  background: #2c2c2c;
+  border-color: #444;
+}
+body.dark-mode .voice-option {
+  color: #eceff1;
+}
+body.dark-mode .voice-option:hover {
+  background-color: #37474f;
+}
+
+/* --- UPDATE PENTING: Penyesuaian Menu Setting untuk Dark Mode --- */
+body.dark-mode .settings-trigger {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Saat aktif di dark mode */
+body.dark-mode .settings-trigger.active {
+  background: #2c2c2c; /* Gear background jadi gelap */
+  color: #fff;
+  border-color: #444;
+}
+
+/* Tombol anak (Admin & Theme) di dark mode */
+body.dark-mode .option-btn {
+  background: #2c2c2c;
+  color: #eceff1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border: 1px solid #444;
+}
+
+body.dark-mode .option-btn:hover {
+  background: #37474f;
+  color: var(--color-primary);
+}
+
+/* Responsif untuk HP (Layar Kecil) */
+@media (max-width: 600px) {
+  /* Ukuran tombol setting sedikit disesuaikan di HP jika perlu */
+  .settings-trigger {
+    width: 38px;
+    height: 38px;
+  }
+}
